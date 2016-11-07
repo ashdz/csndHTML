@@ -31,16 +31,20 @@ app.controller('alllistCtrl',['$scope','$http','$all','$rootScope','$stateParams
 	
 	$scope.contArr=[];
 	$rootScope.tab=$stateParams.tab;
+	$rootScope.loading=true;
+
 	function getMore(){
 		$all.alllist().success(function(data){console.log(data);
 			$rootScope.page++;
 			$scope.contArr=$scope.contArr.concat(data.data);
 			$scope.news=$scope.contArr;
+			$rootScope.loading=false;
 		});
 	}
 	getMore();
 	// 查看更多
 	$scope.loadMore=function(){
+		$rootScope.loading=true;
 		getMore();
 	}	
 
@@ -56,10 +60,13 @@ app.controller('myCtrl',['$scope','$stateParams','$rootScope',function($scope,$s
 
 // details
 app.controller('detailsCtrl',['$scope','$sce','$stateParams','$rootScope','$http','$all','$state',function($scope,$sce,$stateParams,$rootScope,$http,$all,$state){
-	$rootScope.tab=$stateParams.tab;console.log($stateParams.nid)
+	$rootScope.tab=$stateParams.tab;
+	$rootScope.loading=true;
+
 	$all.detailist().success(function(data){
 		$scope.newcont=data.data.content;
 		$scope.conthtml=$sce.trustAsHtml($scope.newcont);
+		$rootScope.loading=false;
 		console.log(data)
 	})
 }])
@@ -93,7 +100,6 @@ app.directive('bottombar',function(){
 app.service('$all',['$http','$stateParams','$rootScope',function($http,$stateParams,$rootScope){
 	$rootScope.page=1;
 	$rootScope.limit=10;
-
 	return {
 		alllist:function(){
 			return $http.get('https://cnodejs.org/api/v1/topics',{

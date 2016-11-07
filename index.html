@@ -12,8 +12,11 @@
 <body ng-controller=ctrl>
 
 	
-	<div ui-view=""></div>
+	<div ui-view="" class="marginBottom"></div>
 	<bottombar></bottombar>
+	<div class="loading" ng-if="loading">
+	    <img src="images/loading.gif" alt="">
+	</div>
 </body>
 <script src="js/angular.min.js"></script>
 <script src="js/ui-route.js"></script>

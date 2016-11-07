@@ -98,7 +98,10 @@ body {
 
 .weui-panel_access {
   padding-top: 69px;
-  padding-bottom: 37px;
+}
+
+.marginBottom {
+  margin-bottom: 62px;
 }
 
 .weui-tabbar {
@@ -161,4 +164,13 @@ body {
 }
 #xqcontent code {
   white-space: pre-wrap;
+}
+
+.loading {
+  position: fixed;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -27px;
 }
